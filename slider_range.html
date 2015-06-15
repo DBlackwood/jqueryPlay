@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Slider - Default functionality</title>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  
+  <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+  <style>
+    h1 
+    { color: maroon;
+      margin-left: 40px;
+    } 
+  </style>
+  <script>
+  $(function() {
+    $( "#slider1" ).slider();
+  });
+  </script>
+</head>
+<body>
+ 
+  <h1>Header Text</h1>
+  <div id="slider1"></div>
+  <p>paragraph text</p>
+
+  <script>
+    $(function() {
+      var slides = $( "#slider-range-min" ).slider({
+        range: "min",
+        value: 2.0,
+        min: 0.0,
+        max: 100.0,
+        slide: function( event, ui ) {
+          $( "#mRate" ).val( ui.value + "%");
+          $( "#mute" ).val( Math.log(1+(ui.value)));  /*put the value in the text box */
+        }
+      });
+      /* initialize */
+      $( "#mRate" ).val( ($( "#slider-range-min").slider( "value" )) + "%_start");  /*convert to number and scale */
+      $( "#mute" ).val($( "#slider-range-min").slider( "value" ));
+      /*update slide based on textbox */
+          $( "#mute" ).change(function() {
+        slides.slider( "value", Math.pow(10, this.value) );
+      });
+    });
+  </script>
+  <p>
+    <label for="mRate">Mutation Rate:</label>
+    <input type="text" id="mRate" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  </p>
+
+  <label for="mRate">Mutation Rate: </label><input id="mute" type="text" style="width:2em; height:1em"></input>% 
+  <div id="slider-range-min" style="width:100px; display: inline-block; vertical-align: top; margin-left:20px"></div>
+  
+</body>
+</html>

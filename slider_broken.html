@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Slider - Default functionality</title>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  
+  <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+  
+  <script>
+  $(function() {
+    $( "#slider1" ).slider();
+  });
+  </script>
+</head>
+<body>
+ 
+  <h1>Header Text</h1>
+  <div id="slider1"></div>
+  <p>paragraph text</p>
+
+  <script>  $(function() {
+    var mutate = $( "#mute" );
+    var slider = $( "<div id='slider'></div>" ).insertAfter( mutate ).slider({
+      min: 0.0,
+      max: 100.0,
+      range: "mutate",
+      value: mutate.val(),
+      slide: function( event, ui ) {
+        mutate.value = ui.value;
+      }
+    });
+    $( "#mute" ).change(function() {
+      slider.slider( "value", this.val() );
+    });
+  });
+  </script> 
+  <input id="mute" type="text"></input>
+  
+</body>
+</html>
